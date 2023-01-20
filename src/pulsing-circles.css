@@ -3,14 +3,11 @@ Reproduction of this animation
 https://twitter.com/mortenjust/status/1614917179907923970
  */
 .loader-pulsing-circles {
-    position: absolute;
+    position: relative;
     display: inline-block;
     width: 400px;
     height: 400px;
     box-sizing: border-box;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
 }
 .loader-pulsing-circles > .layer {
     --v: calc(var(--num) / var(--max-num));
@@ -25,6 +22,7 @@ https://twitter.com/mortenjust/status/1614917179907923970
     animation-direction: alternate;
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 0.99);
     animation-iteration-count: infinite;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
 }
 @keyframes loader-pulsing-circles-rotate {
     from {
@@ -34,5 +32,31 @@ https://twitter.com/mortenjust/status/1614917179907923970
     to {
         rotate: calc(90deg + 10deg * var(--num));
         border-radius: 10%;
+    }
+}
+
+@property --animation-position {
+    syntax: '<number>'; /* <- defined as type number for the transition to work */
+    initial-value: 0;
+    inherits: false;
+}
+
+.loader-pulsing-circles-houdini {
+    background-image: paint(loader1);
+    animation-name: loader-pulsing-circles-rotate-houdini;
+    animation-duration: 2000ms;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(0.5, 0, 0.5, 0.99);
+    animation-iteration-count: infinite;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+@keyframes loader-pulsing-circles-rotate-houdini {
+    from {
+        --animation-position: 0;
+    }
+    to {
+        --animation-position: 1;
     }
 }

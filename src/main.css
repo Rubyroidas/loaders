@@ -7,3 +7,18 @@
     background: #000;
     color: #ccc;
 }
+
+.wrapper {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+@media screen and (min-aspect-ratio: 1/1) {
+    .wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
